@@ -4,3 +4,9 @@ C:\Users\zhoulurong\Documents\Visual Studio 2015\Projects\LeetcodeApp\LeetcodeAp
 C:\Users\zhoulurong\Documents\Visual Studio 2015\Projects\LeetcodeApp\LeetcodeApp\obj\Debug\LeetcodeApp.csprojResolveAssemblyReference.cache
 C:\Users\zhoulurong\Documents\Visual Studio 2015\Projects\LeetcodeApp\LeetcodeApp\obj\Debug\LeetcodeApp.exe
 C:\Users\zhoulurong\Documents\Visual Studio 2015\Projects\LeetcodeApp\LeetcodeApp\obj\Debug\LeetcodeApp.pdb
+C:\Users\zhoulurong\Documents\GitHub\Practice\LeetcodeApp\bin\Debug\LeetcodeApp.exe.config
+C:\Users\zhoulurong\Documents\GitHub\Practice\LeetcodeApp\obj\Debug\LeetcodeApp.exe
+C:\Users\zhoulurong\Documents\GitHub\Practice\LeetcodeApp\obj\Debug\LeetcodeApp.pdb
+C:\Users\zhoulurong\Documents\GitHub\Practice\LeetcodeApp\bin\Debug\LeetcodeApp.exe
+C:\Users\zhoulurong\Documents\GitHub\Practice\LeetcodeApp\bin\Debug\LeetcodeApp.pdb
+C:\Users\zhoulurong\Documents\GitHub\Practice\LeetcodeApp\obj\Debug\LeetcodeApp.csprojResolveAssemblyReference.cache

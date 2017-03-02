@@ -14,7 +14,11 @@ namespace LeetcodeApp
 
             //KeyboardRow.FindWords(new string[4] { "Hello", "Alaska", "Dad", "Peace" });
 
-            FizzBuzz.FizzBuzzDisplay(15);
+            //FizzBuzz.FizzBuzzDisplay(15);
+
+            //ReverseString.ReverseStringFunc("Hello");
+
+            IslandPerimeter.IslandPerimeterFunc(new int[4, 4] { { 0, 1, 0, 0 }, { 1, 1, 1, 0 }, { 0, 1, 0, 0 }, { 1, 1, 0, 0 } });
         }
     }
 }

@@ -12,12 +12,13 @@ namespace LeetcodeApp
     public class ReverseString
     {
         /*
-        Write a function that takes a string as input and returns the string reversed.
+            https://leetcode.com/problems/reverse-string/?tab=Description
+            Write a function that takes a string as input and returns the string reversed.
 
-        Example:
-            Given s = "hello", return "olleh".
+            Example:
+                Given s = "hello", return "olleh".
 
-            Subscribe to see which companies asked this question.
+                Subscribe to see which companies asked this question.
         */
 
         public static string ReverseStringFunc(string s)

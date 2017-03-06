@@ -10,6 +10,8 @@ namespace LeetcodeApp
     {
         static void Main(string[] args)
         {
+            #region 2017/3/2
+
             //NumberComplement.FindComplement(1111111111);
 
             //KeyboardRow.FindWords(new string[4] { "Hello", "Alaska", "Dad", "Peace" });
@@ -20,6 +22,10 @@ namespace LeetcodeApp
 
             //IslandPerimeter.IslandPerimeterFunc(new int[4, 4] { { 0, 1, 0, 0 }, { 1, 1, 1, 0 }, { 0, 1, 0, 0 }, { 1, 1, 0, 0 } });
 
+            #endregion
+
+            #region 2017/3/3
+
             //MaxConsecutiveOnes.FindMaxConsecutiveOnes(new int[16] { 1, 1, 0, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1 });
             //MaxConsecutiveOnes.FindMaxConsecutiveOnes(new int[6] { 1, 1, 0, 1, 1, 1 });
 
@@ -27,7 +33,21 @@ namespace LeetcodeApp
 
             //FindAllNumbersDisappearedinanArray.FindDisappearedNumbers(new int[8] { 4, 3, 2, 7, 8, 2, 3, 1 });
 
-            FindtheDifference.FindTheDifference("abcd", "zzabcde");
+            //FindtheDifference.FindTheDifference("abcd", "zzabcde");
+
+            #endregion
+
+            #region 2017/3/6
+
+            //TwoSumII_Inputarrayissorted.TwoSum(new int[5] { 2, 7, 11, 15, 18 }, 33);
+
+            //ExcelSheetColumnNumber.TitleToNumber("AZ");
+
+            //MissingNumber.missingNumber(new int[5] { 0, 1, 3, 4, 5 });
+
+            MaximumSubarray.MaxSubArray(new int[9] { -2, 1, -3, 4, -1, 2, 1, -5, 4 });
+
+            #endregion
         }
     }
 }

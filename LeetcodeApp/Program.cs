@@ -45,7 +45,21 @@ namespace LeetcodeApp
 
             //MissingNumber.missingNumber(new int[5] { 0, 1, 3, 4, 5 });
 
-            MaximumSubarray.MaxSubArray(new int[9] { -2, 1, -3, 4, -1, 2, 1, -5, 4 });
+            //MaximumSubarray.MaxSubArray(new int[9] { -2, 1, -3, 4, -1, 2, 1, -5, 4 });
+
+            #endregion
+
+            #region 2017/3/7
+
+            //RepeatedSubstringPattern.RepeatedSubstringPatternFunc("abcabc");
+
+            //PowerofFour.IsPowerOfFour(64);
+
+            //ValidPerfectSquare.IsPerfectSquare(19);
+
+            //NumberofSegmentsinaString.CountSegments("Hello");
+
+            //ArrangingCoins.ArrangeCoins(8);
 
             #endregion
         }

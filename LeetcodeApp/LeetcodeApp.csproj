@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AddDigits.cs" />
+    <Compile Include="ArrangingCoins.cs" />
     <Compile Include="DetectCapital.cs" />
     <Compile Include="ExcelSheetColumnNumber.cs" />
     <Compile Include="FindAllNumbersDisappearedinanArray.cs" />
@@ -55,10 +56,14 @@
     <Compile Include="MaximumSubarray.cs" />
     <Compile Include="MissingNumber.cs" />
     <Compile Include="NumberComplement.cs" />
+    <Compile Include="NumberofSegmentsinaString.cs" />
+    <Compile Include="PowerofFour.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RepeatedSubstringPattern.cs" />
     <Compile Include="ReverseString.cs" />
     <Compile Include="TwoSumII-Inputarrayissorted.cs" />
+    <Compile Include="ValidPerfectSquare.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

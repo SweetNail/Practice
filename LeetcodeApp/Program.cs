@@ -62,6 +62,22 @@ namespace LeetcodeApp
             //ArrangingCoins.ArrangeCoins(8);
 
             #endregion
+
+            #region 2017/3/8 
+
+            //Happy Women's Day
+
+            //ValidParentheses.IsValid("(abc))");
+
+            //WordPattern.WordPatternFunc("aaaa", "dog dog dog dog");
+
+            //LengthofLastWord.LengthOfLastWord("Hello World");
+
+            //AddBinary.AddBinaryFunc("11", "1");
+
+            ThirdMaximumNumber.ThirdMax(new int[3] { 3, 2, 1 });
+
+            #endregion
         }
     }
 }

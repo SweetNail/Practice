@@ -35,6 +35,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -47,7 +48,10 @@
     <Compile Include="AddDigits.cs" />
     <Compile Include="ArrangingCoins.cs" />
     <Compile Include="DetectCapital.cs" />
+    <Compile Include="EncodeandDecodeTinyURL.cs" />
     <Compile Include="ExcelSheetColumnNumber.cs" />
+    <Compile Include="ExcelSheetColumnTitle.cs" />
+    <Compile Include="FindAllDuplicatesinanArray.cs" />
     <Compile Include="FindAllNumbersDisappearedinanArray.cs" />
     <Compile Include="FindtheDifference.cs" />
     <Compile Include="FizzBuzz.cs" />
@@ -63,7 +67,9 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RepeatedSubstringPattern.cs" />
+    <Compile Include="ReverseInteger.cs" />
     <Compile Include="ReverseString.cs" />
+    <Compile Include="SingleNumberIII.cs" />
     <Compile Include="ThirdMaximumNumber.cs" />
     <Compile Include="TwoSumII-Inputarrayissorted.cs" />
     <Compile Include="ValidParentheses.cs" />

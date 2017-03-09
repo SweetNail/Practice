@@ -75,7 +75,20 @@ namespace LeetcodeApp
 
             //AddBinary.AddBinaryFunc("11", "1");
 
-            ThirdMaximumNumber.ThirdMax(new int[3] { 3, 2, 1 });
+            //ThirdMaximumNumber.ThirdMax(new int[3] { 3, 2, 1 });
+
+            #endregion
+
+            #region 2017/3/9
+
+            //ExcelSheetColumnTitle.ConvertToTitle(53);
+
+            //string result = EncodeandDecodeTinyURL.encode("http://10.10.2.4:8080/secure/Dashboard.jspa");
+            //string result = EncodeandDecodeTinyURL.decode("http://tinyurl.com/732764945");
+
+            //FindAllDuplicatesinanArray.FindDuplicates(new int[8] { 4, 3, 2, 7, 8, 2, 3, 1 });
+
+            //SingleNumberIII.SingleNumber(new int[6] { 1, 2, 1, 3, 2, 5 });
 
             #endregion
         }

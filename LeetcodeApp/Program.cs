@@ -91,6 +91,20 @@ namespace LeetcodeApp
             //SingleNumberIII.SingleNumber(new int[6] { 1, 2, 1, 3, 2, 5 });
 
             #endregion
+
+            #region 2017/3/10
+
+            //LicenseKeyFormatting.LicenseKeyFormattingFunc("2-4A0r7-4k", 2);
+
+            //Permutations.PermuteFunc(new int[] { 1, 2, 3 });
+
+            //DecodeString.DecodeStringFunc("3[a]2[bc]");
+
+            //GrayCode.grayCode(2);
+
+            //RotateImage.Rotate(new int[,] { { 1, 2, 3 }, { 4, 5, 6 }, { 7, 8, 9 } });
+
+            #endregion
         }
     }
 }

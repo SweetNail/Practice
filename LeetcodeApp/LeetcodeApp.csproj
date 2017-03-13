@@ -59,6 +59,7 @@
     <Compile Include="GrayCode.cs" />
     <Compile Include="IslandPerimeter.cs" />
     <Compile Include="KeyboardRow.cs" />
+    <Compile Include="LargestNumber.cs" />
     <Compile Include="LengthofLastWord.cs" />
     <Compile Include="LicenseKeyFormatting.cs" />
     <Compile Include="MaxConsecutiveOnes.cs" />
@@ -71,12 +72,15 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RepeatedSubstringPattern.cs" />
+    <Compile Include="RestoreIPAddresses.cs" />
     <Compile Include="ReverseInteger.cs" />
     <Compile Include="ReverseString.cs" />
+    <Compile Include="ReverseWordsinaString.cs" />
     <Compile Include="RotateImage.cs" />
     <Compile Include="SingleNumberIII.cs" />
     <Compile Include="ThirdMaximumNumber.cs" />
     <Compile Include="TwoSumII-Inputarrayissorted.cs" />
+    <Compile Include="ValidateIPAddress.cs" />
     <Compile Include="ValidParentheses.cs" />
     <Compile Include="ValidPerfectSquare.cs" />
     <Compile Include="WordPattern.cs" />

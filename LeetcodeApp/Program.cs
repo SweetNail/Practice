@@ -106,7 +106,7 @@ namespace LeetcodeApp
 
             #endregion
 
-            #region 2017/3/11
+            #region 2017/3/13
 
             //ReverseWordsinaString.ReverseWords("the sky is blue");
 
@@ -115,10 +115,72 @@ namespace LeetcodeApp
             //LargestNumber.LargestNumberFunc(new int[] { 30, 30, 34, 5, 9 });
 
             //ValidateIPAddress.ValidIPAddressFunc("256.256.256.256");
-            
+
             //SudokuSolver.solve(null);
 
             #endregion
+
+            #region 2017/3/14
+
+            //HammingDistance.HammingDistanceFunc(1, 4);
+
+            //NextGreaterElementI.NextGreaterElement(new int[2] { 2, 4 }, new int[4] { 1, 2, 3, 4 });
+
+            //SingleNumber.SingleNumberFunc(new int[7] { 3, 7, 9, 7, 6, 6, 9 });
+
+            //SumofTwoIntegers.GetSum(3, 5);
+
+            //MoveZeroes.MoveZeroesFunc(new int[7] { 3, 7, 0, 7, 6, 6, 9 });
+
+            #endregion
+
+            #region 2017/3/15
+
+            //RansomNote.CanConstruct("aa", "ab");
+
+            //Base7.ConvertToBase7(100);
+
+            //FirstUniqueCharacterinaString.FirstUniqChar("eee");
+
+            //MajorityElement.MajorityElementFunc(new int[7] { 7, 7, 7, 7, 6, 6, 9 });
+
+            //ValidAnagram.IsAnagram("rat", "car");
+
+            #endregion
+
+            #region 2017/3/17
+
+            //LongestPalindrome.LongestPalindromeFunc("abccccdda");
+
+            //ContainsDuplicate.ContainsDuplicateFunc(new int[7] { 8, 7, 6, 5, 4, 2, 1 });
+
+            //RomantoInteger.RomanToInt("XLMD");
+
+            //AddStrings.AddStringsFunc("123", "123");
+
+            //PowerofTwo.IsPowerOfTwo(16);
+
+            #endregion
+
+            #region 2017/3/20
+
+            //PowerofThree.IsPowerOfThree(27);
+
+            //SearchInsertPosition.SearchInsert(new int[7] { 1, 3, 4, 5, 6, 7, 8 }, 3);
+
+            //ReverseVowelsofaString.ReverseVowels("leetcode");
+
+            //FactorialTrailingZeroes.TrailingZeroes(100);
+
+            //PalindromeNumber.IsPalindrome(12121);
+
+            #endregion
+
+            #region 2017/3/21
+
+
+
+            #endregion 
         }
     }
 }

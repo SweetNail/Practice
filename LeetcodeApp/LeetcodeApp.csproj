@@ -50,6 +50,7 @@
     <Compile Include="ArrangingCoins.cs" />
     <Compile Include="Base7.cs" />
     <Compile Include="ContainsDuplicate.cs" />
+    <Compile Include="CountandSay.cs" />
     <Compile Include="DecodeString.cs" />
     <Compile Include="DetectCapital.cs" />
     <Compile Include="EncodeandDecodeTinyURL.cs" />
@@ -61,12 +62,16 @@
     <Compile Include="FindtheDifference.cs" />
     <Compile Include="FirstUniqueCharacterinaString.cs" />
     <Compile Include="FizzBuzz.cs" />
+    <Compile Include="GenerateParentheses.cs" />
     <Compile Include="GrayCode.cs" />
     <Compile Include="HammingDistance.cs" />
+    <Compile Include="IntegerBreak.cs" />
     <Compile Include="IslandPerimeter.cs" />
+    <Compile Include="IsSubsequence.cs" />
     <Compile Include="KeyboardRow.cs" />
     <Compile Include="LargestNumber.cs" />
     <Compile Include="LengthofLastWord.cs" />
+    <Compile Include="LexicographicalNumbers.cs" />
     <Compile Include="LicenseKeyFormatting.cs" />
     <Compile Include="LongestPalindrome.cs" />
     <Compile Include="MajorityElement.cs" />
@@ -82,6 +87,7 @@
     <Compile Include="PowerofFour.cs" />
     <Compile Include="PowerofThree.cs" />
     <Compile Include="PowerofTwo.cs" />
+    <Compile Include="ProductofArrayExceptSelf.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RansomNote.cs" />
@@ -96,9 +102,11 @@
     <Compile Include="SearchInsertPosition.cs" />
     <Compile Include="SingleNumber.cs" />
     <Compile Include="SingleNumberIII.cs" />
+    <Compile Include="SortCharactersByFrequency.cs" />
     <Compile Include="SudokuSolver.cs" />
     <Compile Include="SumofTwoIntegers.cs" />
     <Compile Include="ThirdMaximumNumber.cs" />
+    <Compile Include="TopKFrequentElements.cs" />
     <Compile Include="Tree\TreeNode.cs" />
     <Compile Include="TwoSumII-Inputarrayissorted.cs" />
     <Compile Include="ValidAnagram.cs" />

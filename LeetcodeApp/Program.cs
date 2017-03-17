@@ -178,9 +178,25 @@ namespace LeetcodeApp
 
             #region 2017/3/21
 
+            //SortCharactersByFrequency.FrequencySort("Aabb");
 
+            //ProductofArrayExceptSelf.ProductExceptSelf(new int[4] { 1, 2, 3, 4 });
 
-            #endregion 
+            //TopKFrequentElements.TopKFrequent(new int[6] { 1, 1, 1, 2, 2, 3 }, 2);
+
+            //IntegerBreak.IntegerBreakFunc(10);
+
+            //IsSubsequence.IsSubsequenceFunc("axc", "ahbgdc");
+
+            #endregion
+
+            #region 2017/3/22
+
+            //GenerateParentheses.GenerateParenthesis(3);
+
+            //LexicographicalNumbers.LexicalOrder(101);
+
+            #endregion
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Security.Cryptography;
+using System.Web;
 
 namespace LeetcodeApp.common
 {
@@ -168,8 +169,7 @@ namespace LeetcodeApp.common
 
             #region 构造函数
 
-
-            public YZMHelper()
+            public ValidateCodeHelper()
             {
                 HttpContext.Current.Response.Expires = 0;
                 HttpContext.Current.Response.Buffer = true;

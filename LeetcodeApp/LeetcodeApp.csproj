@@ -34,7 +34,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Management" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -49,6 +52,15 @@
     <Compile Include="AddStrings.cs" />
     <Compile Include="ArrangingCoins.cs" />
     <Compile Include="Base7.cs" />
+    <Compile Include="common\ComputerHelper.cs" />
+    <Compile Include="common\EncryptionHelper.cs" />
+    <Compile Include="common\EntityHelper.cs" />
+    <Compile Include="common\FTPHelper.cs" />
+    <Compile Include="common\IOHelper.cs" />
+    <Compile Include="common\MailHelper.cs" />
+    <Compile Include="common\SqlHelper.cs" />
+    <Compile Include="common\ValidateCode.cs" />
+    <Compile Include="common\XMLHelper.cs" />
     <Compile Include="ContainsDuplicate.cs" />
     <Compile Include="CountandSay.cs" />
     <Compile Include="DecodeString.cs" />
@@ -107,6 +119,7 @@
     <Compile Include="SumofTwoIntegers.cs" />
     <Compile Include="ThirdMaximumNumber.cs" />
     <Compile Include="TopKFrequentElements.cs" />
+    <Compile Include="Tree\BinaryTree.cs" />
     <Compile Include="Tree\TreeNode.cs" />
     <Compile Include="TwoSumII-Inputarrayissorted.cs" />
     <Compile Include="ValidAnagram.cs" />
@@ -118,6 +131,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

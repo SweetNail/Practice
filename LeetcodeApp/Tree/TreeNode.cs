@@ -11,12 +11,36 @@ namespace LeetcodeApp.Tree
     /// </summary>
     public class TreeNode
     {
-        public int val;
+        private object _data; //数据
+        private TreeNode _left; //左孩子
+        private TreeNode _right; //右孩子
 
-        public TreeNode left;
+        public object Data
+        {
+            get { return _data; }
+        }
 
-        public TreeNode right;
+        public TreeNode Left //左孩子
+        {
+            get { return _left; }
+            set { _left = value; }
+        }
 
-        public TreeNode(int x) { val = x; }
+        public TreeNode Right //右孩子
+        {
+            get { return _right; }
+            set { _right = value; }
+        }
+
+        //构造方法
+        public TreeNode(object data)
+        {
+            _data = data;
+        }
+
+        public override string ToString()
+        {
+            return _data.ToString();
+        }
     }
 }

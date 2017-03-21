@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LeetcodeApp.Tree;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -201,6 +202,20 @@ namespace LeetcodeApp
             #endregion
 
             #endregion
+
+            #region Tree console
+
+            BinaryTree bTree = new BinaryTree("ABCDEF");
+            bTree.PreOrder(bTree.Head); //先序遍
+            Console.WriteLine();
+            bTree.MidOrder(bTree.Head); //中序遍
+            Console.WriteLine();
+            bTree.AfterOrder(bTree.Head); //后序遍
+            Console.WriteLine();
+
+            #endregion
+
+            Console.ReadLine();
         }
     }
 }

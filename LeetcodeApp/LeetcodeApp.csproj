@@ -56,8 +56,11 @@
     <Compile Include="common\EncryptionHelper.cs" />
     <Compile Include="common\EntityHelper.cs" />
     <Compile Include="common\FTPHelper.cs" />
+    <Compile Include="common\HttpHelper.cs" />
     <Compile Include="common\IOHelper.cs" />
     <Compile Include="common\MailHelper.cs" />
+    <Compile Include="common\PredicateBuilder.cs" />
+    <Compile Include="common\RegexHelper.cs" />
     <Compile Include="common\SqlHelper.cs" />
     <Compile Include="common\ValidateCode.cs" />
     <Compile Include="common\XMLHelper.cs" />
@@ -120,6 +123,7 @@
     <Compile Include="ThirdMaximumNumber.cs" />
     <Compile Include="TopKFrequentElements.cs" />
     <Compile Include="Tree\BinaryTree.cs" />
+    <Compile Include="common\IDCardHelper.cs" />
     <Compile Include="Tree\TreeNode.cs" />
     <Compile Include="TwoSumII-Inputarrayissorted.cs" />
     <Compile Include="ValidAnagram.cs" />

@@ -10,3 +10,5 @@ C:\Users\zhoulurong\Documents\GitHub\Practice\LeetcodeApp\obj\Debug\LeetcodeApp.
 C:\Users\zhoulurong\Documents\GitHub\Practice\LeetcodeApp\bin\Debug\LeetcodeApp.exe
 C:\Users\zhoulurong\Documents\GitHub\Practice\LeetcodeApp\bin\Debug\LeetcodeApp.pdb
 C:\Users\zhoulurong\Documents\GitHub\Practice\LeetcodeApp\obj\Debug\LeetcodeApp.csprojResolveAssemblyReference.cache
+C:\Users\zhoulurong\Documents\GitHub\Practice\LeetcodeApp\obj\Debug\Interop.LCC11.dll
+C:\Users\zhoulurong\Documents\GitHub\Practice\LeetcodeApp\obj\Debug\LeetcodeApp.csproj.ResolveComReference.cache

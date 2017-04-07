@@ -33,6 +33,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.mshtml, Version=7.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="MongoDB">
+      <HintPath>..\..\..\..\Desktop\mongodb-csharp-master\mongodb-csharp-master\source\MongoDB\bin\Debug\MongoDB.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
@@ -55,10 +61,12 @@
     <Compile Include="common\ComputerHelper.cs" />
     <Compile Include="common\EncryptionHelper.cs" />
     <Compile Include="common\EntityHelper.cs" />
+    <Compile Include="common\ExcelHelper.cs" />
     <Compile Include="common\FTPHelper.cs" />
     <Compile Include="common\HttpHelper.cs" />
     <Compile Include="common\IOHelper.cs" />
     <Compile Include="common\MailHelper.cs" />
+    <Compile Include="common\MongoDBHelper.cs" />
     <Compile Include="common\PredicateBuilder.cs" />
     <Compile Include="common\RegexHelper.cs" />
     <Compile Include="common\SqlHelper.cs" />
@@ -118,6 +126,8 @@
     <Compile Include="SingleNumber.cs" />
     <Compile Include="SingleNumberIII.cs" />
     <Compile Include="SortCharactersByFrequency.cs" />
+    <Compile Include="Spider\HttpPageParser.cs" />
+    <Compile Include="Spider\SpiderConfig.cs" />
     <Compile Include="SudokuSolver.cs" />
     <Compile Include="SumofTwoIntegers.cs" />
     <Compile Include="ThirdMaximumNumber.cs" />
@@ -135,7 +145,44 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <COMReference Include="LCC11">
+      <Guid>{EDCD5812-6A06-43C3-AFAC-46EF5D14E22C}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="Microsoft.Office.Core">
+      <Guid>{2DF8D04C-5BFA-101B-BDE5-00AA0044DE52}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>5</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="Microsoft.Office.Interop.Excel">
+      <Guid>{00020813-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>7</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="VBIDE">
+      <Guid>{0002E157-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>5</VersionMajor>
+      <VersionMinor>3</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

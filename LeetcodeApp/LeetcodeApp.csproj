@@ -58,6 +58,7 @@
     <Compile Include="AddStrings.cs" />
     <Compile Include="ArrangingCoins.cs" />
     <Compile Include="Base7.cs" />
+    <Compile Include="common\CacheHelper.cs" />
     <Compile Include="common\ComputerHelper.cs" />
     <Compile Include="common\EncryptionHelper.cs" />
     <Compile Include="common\EntityHelper.cs" />
@@ -68,6 +69,7 @@
     <Compile Include="common\MailHelper.cs" />
     <Compile Include="common\MongoDBHelper.cs" />
     <Compile Include="common\PredicateBuilder.cs" />
+    <Compile Include="common\RedisHelper.cs" />
     <Compile Include="common\RegexHelper.cs" />
     <Compile Include="common\SqlHelper.cs" />
     <Compile Include="common\ValidateCode.cs" />

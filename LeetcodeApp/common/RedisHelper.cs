@@ -1,277 +1,437 @@
-﻿using Newtonsoft.Json;
-using StackExchange.Redis;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace LeetcodeApp.common
 {
     /// <summary>
-    /// Redis操作
+    /// Redis操作帮助类
     /// </summary>
     public class RedisHelper
     {
-        private static string connstr = System.Configuration.ConfigurationManager.AppSettings["RedisConnectStr"];// "127.0.0.1:6379,allowadmin=true";
-        private static ConnectionMultiplexer conn = ConnectionMultiplexer.Connect(connstr);
-        private static IDatabase db = conn.GetDatabase(1);
+        private static string RedisPath = ConfigurationManager.AppSettings["RedisPath"];
 
-        /// <summary>
-        /// 获取系统的redis key前缀
-        /// </summary>
-        /// <param name="resourceid">资源Id</param>
-        /// <returns></returns>
-        public static string GetMyKey(string resourceid = "")
+        #region -- 连接信息 --
+        //10.0.18.8:6379
+        public static PooledRedisClientManager prcm = CreateManager(new string[] { RedisPath }, new string[] { RedisPath });
+        private static PooledRedisClientManager CreateManager(string[] readWriteHosts, string[] readOnlyHosts)
         {
-            string Key = "report_";
-            if (!string.IsNullOrWhiteSpace(resourceid))
+            // 支持读写分离，均衡负载 
+            return new PooledRedisClientManager(readWriteHosts, readOnlyHosts, new RedisClientManagerConfig
             {
-                Key = string.Format("report_res_{0}", resourceid);
+                MaxWritePoolSize = 5, // “写”链接池链接数 
+                MaxReadPoolSize = 5, // “读”链接池链接数 
+                AutoStart = true,
+            });
+        }
+        #endregion
+
+        #region -- Item --
+        /// <summary>
+        /// 设置单体
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="key"></param>
+        /// <param name="t"></param>
+        /// <param name="timeSpan"></param>
+        /// <returns></returns>
+        public static bool Item_Set<T>(string key, T t)
+        {
+            try
+            {
+                using (IRedisClient redis = prcm.GetClient())
+                {
+                    return redis.Set<T>(key, t, new TimeSpan(1, 0, 0));
+                }
             }
-            return Key;
-        }
-
-        #region String 可以设置过期时间
-
-        /// <summary>
-        /// 保存单个key value
-        /// </summary>
-        /// <param name="key">Redis Key</param>
-        /// <param name="value">保存的值</param>
-        /// <param name="expiry">过期时间</param>
-        /// <returns></returns>
-        public static bool SetStringKey(string key, string value, TimeSpan? expiry = default(TimeSpan?))
-        {
-            return db.StringSet(key, value, expiry);
+            catch (Exception ex)
+            {
+                // LogInfo
+            }
+            return false;
         }
 
         /// <summary>
-        /// 保存多个key value
-        /// </summary>
-        /// <param name="arr">key</param>
-        /// <returns></returns>
-        public static bool SetStringKey(KeyValuePair<RedisKey, RedisValue>[] arr)
-        {
-            return db.StringSet(arr);
-        }
-
-        /// <summary>
-        /// 保存一个对象
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="key"></param>
-        /// <param name="obj"></param>
-        /// <returns></returns>
-        public static bool SetStringKey<T>(string key, T obj, TimeSpan? expiry = default(TimeSpan?))
-        {
-            string json = JsonConvert.SerializeObject(obj);
-            return db.StringSet(key, json, expiry);
-        }
-
-        /// <summary>
-        /// 获取单个key的值
-        /// </summary>
-        /// <param name="key">Redis Key</param>
-        /// <returns></returns>
-
-        public static RedisValue GetStringKey(string key)
-        {
-            return db.StringGet(key);
-        }
-
-        /// <summary>
-        /// 获取多个Key
-        /// </summary>
-        /// <param name="listKey">Redis Key集合</param>
-        /// <returns></returns>
-        public static RedisValue[] GetStringKey(List<RedisKey> listKey)
-        {
-            return db.StringGet(listKey.ToArray());
-        }
-
-        /// <summary>
-        /// 获取一个key的对象
+        /// 获取单体
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="key"></param>
         /// <returns></returns>
-        public static T GetStringKey<T>(string key)
+        public static T Item_Get<T>(string key) where T : class
         {
-            return JsonConvert.DeserializeObject<T>(db.StringGet(key));
+            using (IRedisClient redis = prcm.GetClient())
+            {
+                return redis.Get<T>(key);
+            }
+        }
+
+        /// <summary>
+        /// 移除单体
+        /// </summary>
+        /// <param name="key"></param>
+        public static bool Item_Remove(string key)
+        {
+            using (IRedisClient redis = prcm.GetClient())
+            {
+                return redis.Remove(key);
+            }
         }
 
         #endregion
 
-        #region Hash
+        #region -- List --
 
-        /// <summary>
-        /// 保存一个集合
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="key">Redis Key</param>
-        /// <param name="list">数据集合</param>
-        /// <param name="getModelId"></param>
-        public static void HashSet<T>(string key, List<T> list, Func<T, string> getModelId)
+        public static void List_Add<T>(string key, T t)
         {
-            List<HashEntry> listHashEntry = new List<HashEntry>();
-            foreach (var item in list)
+            using (IRedisClient redis = prcm.GetClient())
             {
-                string json = JsonConvert.SerializeObject(item);
-                listHashEntry.Add(new HashEntry(getModelId(item), json));
+                var redisTypedClient = redis.GetTypedClient<T>();
+                redisTypedClient.AddItemToList(redisTypedClient.Lists[key], t);
             }
-            db.HashSet(key, listHashEntry.ToArray());
+        }
+
+
+
+        public static bool List_Remove<T>(string key, T t)
+        {
+            using (IRedisClient redis = prcm.GetClient())
+            {
+                var redisTypedClient = redis.GetTypedClient<T>();
+                return redisTypedClient.RemoveItemFromList(redisTypedClient.Lists[key], t) > 0;
+            }
+        }
+        public static void List_RemoveAll<T>(string key)
+        {
+            using (IRedisClient redis = prcm.GetClient())
+            {
+                var redisTypedClient = redis.GetTypedClient<T>();
+                redisTypedClient.Lists[key].RemoveAll();
+            }
+        }
+
+        public static int List_Count(string key)
+        {
+            using (IRedisClient redis = prcm.GetClient())
+            {
+                return redis.GetListCount(key);
+            }
+        }
+
+        public static List<T> List_GetRange<T>(string key, int start, int count)
+        {
+            using (IRedisClient redis = prcm.GetClient())
+            {
+                var c = redis.GetTypedClient<T>();
+                return c.Lists[key].GetRange(start, start + count - 1);
+            }
+        }
+
+
+        public static List<T> List_GetList<T>(string key)
+        {
+            using (IRedisClient redis = prcm.GetClient())
+            {
+                var c = redis.GetTypedClient<T>();
+                return c.Lists[key].GetRange(0, c.Lists[key].Count);
+            }
+        }
+
+        public static List<T> List_GetList<T>(string key, int pageIndex, int pageSize)
+        {
+            int start = pageSize * (pageIndex - 1);
+            return List_GetRange<T>(key, start, pageSize);
         }
 
         /// <summary>
-        /// 获取Hash中的单个key的值
+        /// 设置缓存过期
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="datetime"></param>
+        public static void List_SetExpire(string key, DateTime datetime)
+        {
+            using (IRedisClient redis = prcm.GetClient())
+            {
+                redis.ExpireEntryAt(key, datetime);
+            }
+        }
+        #endregion
+
+        #region -- Set --
+        public static void Set_Add<T>(string key, T t)
+        {
+            using (IRedisClient redis = prcm.GetClient())
+            {
+                var redisTypedClient = redis.GetTypedClient<T>();
+                redisTypedClient.Sets[key].Add(t);
+            }
+        }
+        public static bool Set_Contains<T>(string key, T t)
+        {
+            using (IRedisClient redis = prcm.GetClient())
+            {
+                var redisTypedClient = redis.GetTypedClient<T>();
+                return redisTypedClient.Sets[key].Contains(t);
+            }
+        }
+        public static bool Set_Remove<T>(string key, T t)
+        {
+            using (IRedisClient redis = prcm.GetClient())
+            {
+                var redisTypedClient = redis.GetTypedClient<T>();
+                return redisTypedClient.Sets[key].Remove(t);
+            }
+        }
+        #endregion
+
+        #region -- Hash --
+        /// <summary>
+        /// 判断某个数据是否已经被缓存
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        /// <param name="key">Redis Key</param>
-        /// <param name="hasFildValue">RedisValue</param>
+        /// <param name="key"></param>
+        /// <param name="dataKey"></param>
         /// <returns></returns>
-        public static T GetHashKey<T>(string key, string hasFildValue)
+        public static bool Hash_Exist<T>(string key, string dataKey)
         {
-            if (!string.IsNullOrWhiteSpace(key) && !string.IsNullOrWhiteSpace(hasFildValue))
+            using (IRedisClient redis = prcm.GetClient())
             {
-                RedisValue value = db.HashGet(key, hasFildValue);
-                if (!value.IsNullOrEmpty)
-                {
-                    return JsonConvert.DeserializeObject<T>(value);
-                }
+                return redis.HashContainsEntry(key, dataKey);
             }
-            return default(T);
         }
 
         /// <summary>
-        /// 获取hash中的多个key的值
+        /// 存储数据到hash表
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        /// <param name="key">Redis Key</param>
-        /// <param name="listhashFields">RedisValue value</param>
+        /// <param name="key"></param>
+        /// <param name="dataKey"></param>
         /// <returns></returns>
-        public static List<T> GetHashKey<T>(string key, List<RedisValue> listhashFields)
+        public static bool Hash_Set<T>(string key, string dataKey, T t)
         {
-            List<T> result = new List<T>();
-            if (!string.IsNullOrWhiteSpace(key) && listhashFields.Count > 0)
+            using (IRedisClient redis = prcm.GetClient())
             {
-                RedisValue[] value = db.HashGet(key, listhashFields.ToArray());
-                foreach (var item in value)
+                string value = ServiceStack.Text.JsonSerializer.SerializeToString<T>(t);
+                return redis.SetEntryInHash(key, dataKey, value);
+            }
+        }
+        /// <summary>
+        /// 移除hash中的某值
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="key"></param>
+        /// <param name="dataKey"></param>
+        /// <returns></returns>
+        public static bool Hash_Remove(string key, string dataKey)
+        {
+            using (IRedisClient redis = prcm.GetClient())
+            {
+                return redis.RemoveEntryFromHash(key, dataKey);
+            }
+        }
+        /// <summary>
+        /// 移除整个hash
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="key"></param>
+        /// <param name="dataKey"></param>
+        /// <returns></returns>
+        public static bool Hash_Remove(string key)
+        {
+            using (IRedisClient redis = prcm.GetClient())
+            {
+                return redis.Remove(key);
+            }
+        }
+        /// <summary>
+        /// 从hash表获取数据
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="key"></param>
+        /// <param name="dataKey"></param>
+        /// <returns></returns>
+        public static T Hash_Get<T>(string key, string dataKey)
+        {
+            using (IRedisClient redis = prcm.GetClient())
+            {
+                string value = redis.GetValueFromHash(key, dataKey);
+                return ServiceStack.Text.JsonSerializer.DeserializeFromString<T>(value);
+            }
+        }
+        /// <summary>
+        /// 获取整个hash的数据
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        public static List<T> Hash_GetAll<T>(string key)
+        {
+            using (IRedisClient redis = prcm.GetClient())
+            {
+                var list = redis.GetHashValues(key);
+                if (list != null && list.Count > 0)
                 {
-                    if (!item.IsNullOrEmpty)
+                    List<T> result = new List<T>();
+                    foreach (var item in list)
                     {
-                        result.Add(JsonConvert.DeserializeObject<T>(item));
+                        var value = ServiceStack.Text.JsonSerializer.DeserializeFromString<T>(item);
+                        result.Add(value);
                     }
+                    return result;
                 }
+                return null;
             }
-            return result;
         }
-
         /// <summary>
-        /// 获取hashkey所有Redis key
+        /// 设置缓存过期
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="datetime"></param>
+        public static void Hash_SetExpire(string key, DateTime datetime)
+        {
+            using (IRedisClient redis = prcm.GetClient())
+            {
+                redis.ExpireEntryAt(key, datetime);
+            }
+        }
+        #endregion
+
+        #region -- SortedSet --
+        /// <summary>
+        ///  添加数据到 SortedSet
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="key"></param>
-        /// <returns></returns>
-        public static List<T> GetHashAll<T>(string key)
+        /// <param name="t"></param>
+        /// <param name="score"></param>
+        public static bool SortedSet_Add<T>(string key, T t, double score)
         {
-            List<T> result = new List<T>();
-            RedisValue[] arr = db.HashKeys(key);
-            foreach (var item in arr)
+            using (IRedisClient redis = prcm.GetClient())
             {
-                if (!item.IsNullOrEmpty)
-                {
-                    result.Add(JsonConvert.DeserializeObject<T>(item));
-                }
+                string value = ServiceStack.Text.JsonSerializer.SerializeToString<T>(t);
+                return redis.AddItemToSortedSet(key, value, score);
             }
-            return result;
         }
-
         /// <summary>
-        /// 获取hashkey所有的值
+        /// 移除数据从SortedSet
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="key"></param>
+        /// <param name="t"></param>
         /// <returns></returns>
-        public static List<T> HashGetAll<T>(string key)
+        public static bool SortedSet_Remove<T>(string key, T t)
         {
-            List<T> result = new List<T>();
-            HashEntry[] arr = db.HashGetAll(key);
-            foreach (var item in arr)
+            using (IRedisClient redis = prcm.GetClient())
             {
-                if (!item.Value.IsNullOrEmpty)
+                string value = ServiceStack.Text.JsonSerializer.SerializeToString<T>(t);
+                return redis.RemoveItemFromSortedSet(key, value);
+            }
+        }
+        /// <summary>
+        /// 修剪SortedSet
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="size">保留的条数</param>
+        /// <returns></returns>
+        public static int SortedSet_Trim(string key, int size)
+        {
+            using (IRedisClient redis = prcm.GetClient())
+            {
+                return redis.RemoveRangeFromSortedSet(key, size, 9999999);
+            }
+        }
+        /// <summary>
+        /// 获取SortedSet的长度
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        public static int SortedSet_Count(string key)
+        {
+            using (IRedisClient redis = prcm.GetClient())
+            {
+                return redis.GetSortedSetCount(key);
+            }
+        }
+
+        /// <summary>
+        /// 获取SortedSet的分页数据
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="key"></param>
+        /// <param name="pageIndex"></param>
+        /// <param name="pageSize"></param>
+        /// <returns></returns>
+        public static List<T> SortedSet_GetList<T>(string key, int pageIndex, int pageSize)
+        {
+            using (IRedisClient redis = prcm.GetClient())
+            {
+                var list = redis.GetRangeFromSortedSet(key, (pageIndex - 1) * pageSize, pageIndex * pageSize - 1);
+                if (list != null && list.Count > 0)
                 {
-                    result.Add(JsonConvert.DeserializeObject<T>(item.Value));
+                    List<T> result = new List<T>();
+                    foreach (var item in list)
+                    {
+                        var data = ServiceStack.Text.JsonSerializer.DeserializeFromString<T>(item);
+                        result.Add(data);
+                    }
+                    return result;
                 }
             }
-            return result;
+            return null;
+        }
+
+
+        /// <summary>
+        /// 获取SortedSet的全部数据
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="key"></param>
+        /// <param name="pageIndex"></param>
+        /// <param name="pageSize"></param>
+        /// <returns></returns>
+        public static List<T> SortedSet_GetListALL<T>(string key)
+        {
+            using (IRedisClient redis = prcm.GetClient())
+            {
+                var list = redis.GetRangeFromSortedSet(key, 0, 9999999);
+                if (list != null && list.Count > 0)
+                {
+                    List<T> result = new List<T>();
+                    foreach (var item in list)
+                    {
+                        var data = ServiceStack.Text.JsonSerializer.DeserializeFromString<T>(item);
+                        result.Add(data);
+                    }
+                    return result;
+                }
+            }
+            return null;
         }
 
         /// <summary>
-        /// 删除hasekey
+        /// 设置缓存过期
         /// </summary>
         /// <param name="key"></param>
-        /// <param name="hashField"></param>
-        /// <returns></returns>
-        public static bool DeleteHase(RedisKey key, RedisValue hashField)
+        /// <param name="datetime"></param>
+        public static void SortedSet_SetExpire(string key, DateTime datetime)
         {
-            return db.HashDelete(key, hashField);
+            using (IRedisClient redis = prcm.GetClient())
+            {
+                redis.ExpireEntryAt(key, datetime);
+            }
         }
+
+        //public static double SortedSet_GetItemScore<T>(string key,T t)
+        //{
+        //    using (IRedisClient redis = prcm.GetClient())
+        //    {
+        //        var data = ServiceStack.Text.JsonSerializer.SerializeToString<T>(t);
+        //        return redis.GetItemScoreInSortedSet(key, data);
+        //    }
+        //    return 0;
+        //}
 
         #endregion
-
-        #region key
-
-        /// <summary>
-        /// 删除单个key
-        /// </summary>
-        /// <param name="key">redis key</param>
-        /// <returns>是否删除成功</returns>
-        public static bool KeyDelete(string key)
-        {
-            return db.KeyDelete(key);
-        }
-
-        /// <summary>
-        /// 删除多个key
-        /// </summary>
-        /// <param name="keys">rediskey</param>
-        /// <returns>成功删除的个数</returns>
-        public static long keyDelete(RedisKey[] keys)
-        {
-            return db.KeyDelete(keys);
-        }
-
-        /// <summary>
-        /// 判断key是否存储
-        /// </summary>
-        /// <param name="key">redis key</param>
-        /// <returns></returns>
-        public static bool KeyExists(string key)
-        {
-            return db.KeyExists(key);
-        }
-
-        /// <summary>
-        /// 重新命名key
-        /// </summary>
-        /// <param name="key">就的redis key</param>
-        /// <param name="newKey">新的redis key</param>
-        /// <returns></returns>
-        public static bool KeyRename(string key, string newKey)
-        {
-            return db.KeyRename(key, newKey);
-        }
-
-        #endregion
-
-        /// <summary>
-        /// 追加值
-        /// </summary>
-        /// <param name="key"></param>
-        /// <param name="value"></param>
-        public static void StringAppend(string key, string value)
-        {
-            ////追加值，返回追加后长度
-            long appendlong = db.StringAppend(key, value);
-        }
     }
 }

@@ -1,4 +1,5 @@
-﻿using LeetcodeApp.Tree;
+﻿using LeetcodeApp.TraceLog;
+using LeetcodeApp.Tree;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -205,17 +206,31 @@ namespace LeetcodeApp
 
             #region Tree console
 
-            BinaryTree bTree = new BinaryTree("ABCDEF");
-            bTree.PreOrder(bTree.Head); //先序遍
-            Console.WriteLine();
-            bTree.MidOrder(bTree.Head); //中序遍
-            Console.WriteLine();
-            bTree.AfterOrder(bTree.Head); //后序遍
-            Console.WriteLine();
+            //BinaryTree bTree = new BinaryTree("ABCDEF");
+            //bTree.PreOrder(bTree.Head); //先序遍
+            //Console.WriteLine();
+            //bTree.MidOrder(bTree.Head); //中序遍
+            //Console.WriteLine();
+            //bTree.AfterOrder(bTree.Head); //后序遍
+            //Console.WriteLine();
+
+            #endregion
+
+            #region Test
+
+            stu ssss = new stu() { ID = "1", Age = 1 };
+            XmlUtil.ModelToXML(ssss, ssss, OperationType.UPDATE);
 
             #endregion
 
             Console.ReadLine();
         }
+    }
+
+    public class stu
+    {
+        public string ID { get; set; }
+
+        public int Age { get; set; }
     }
 }

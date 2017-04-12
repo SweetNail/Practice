@@ -82,6 +82,12 @@
     <Compile Include="ExcelSheetColumnNumber.cs" />
     <Compile Include="ExcelSheetColumnTitle.cs" />
     <Compile Include="FactorialTrailingZeroes.cs" />
+    <Compile Include="Filter\demo\UserInfoAction.cs" />
+    <Compile Include="Filter\sql\SqlDAL.cs" />
+    <Compile Include="Filter\sql\SqlHelper.cs" />
+    <Compile Include="Filter\sql\TransactionAop.cs" />
+    <Compile Include="Filter\sql\TransactionAttribute.cs" />
+    <Compile Include="Filter\sql\TransactionMethodAttribute.cs" />
     <Compile Include="FindAllDuplicatesinanArray.cs" />
     <Compile Include="FindAllNumbersDisappearedinanArray.cs" />
     <Compile Include="FindtheDifference.cs" />
@@ -194,6 +200,7 @@
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

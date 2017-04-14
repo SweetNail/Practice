@@ -36,8 +36,9 @@
     <Reference Include="Microsoft.mshtml, Version=7.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
-    <Reference Include="MongoDB">
-      <HintPath>..\..\..\..\Desktop\mongodb-csharp-master\mongodb-csharp-master\source\MongoDB\bin\Debug\MongoDB.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
@@ -67,12 +68,15 @@
     <Compile Include="common\HttpHelper.cs" />
     <Compile Include="common\IOHelper.cs" />
     <Compile Include="common\MailHelper.cs" />
+    <Compile Include="common\MapperHelper.cs" />
     <Compile Include="common\MongoDBHelper.cs" />
     <Compile Include="common\PredicateBuilder.cs" />
     <Compile Include="common\RedisHelper.cs" />
     <Compile Include="common\RegexHelper.cs" />
     <Compile Include="common\SqlHelper.cs" />
+    <Compile Include="common\StringHelper.cs" />
     <Compile Include="common\ValidateCode.cs" />
+    <Compile Include="common\ValidateHelper.cs" />
     <Compile Include="common\XMLHelper.cs" />
     <Compile Include="ContainsDuplicate.cs" />
     <Compile Include="CountandSay.cs" />
@@ -135,6 +139,7 @@
     <Compile Include="SingleNumberIII.cs" />
     <Compile Include="SortCharactersByFrequency.cs" />
     <Compile Include="Spider\HttpPageParser.cs" />
+    <Compile Include="Spider\Spider.cs" />
     <Compile Include="Spider\SpiderConfig.cs" />
     <Compile Include="SudokuSolver.cs" />
     <Compile Include="SumofTwoIntegers.cs" />
@@ -161,6 +166,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <COMReference Include="LCC11">
